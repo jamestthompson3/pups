@@ -10,6 +10,9 @@
 
 # ocamlbuild working directory
 _build/
+# JS things
+node_modules/
+lib/
 
 # ocamlbuild targets
 *.byte
