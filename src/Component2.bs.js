@@ -42,70 +42,64 @@ function make() {
               switch (match) {
                 case 0 : 
                     return React.createElement("div", {
-                                className: "gallery"
-                              }, React.createElement("div", {
-                                    className: "side"
-                                  }, Belt_Array.map(Belt_List.toArray(self[/* state */1][/* savedPups */1]), (function (pup) {
-                                          return React.createElement("div", {
-                                                      className: "gallery-image"
-                                                    }, ReasonReact.element(undefined, undefined, Image$ReactTemplate.make(pup[/* imageSrc */1], /* array */[])), React.createElement("h3", undefined, pup[/* name */0]));
-                                        }))), React.createElement("div", {
-                                    className: "centered-action",
-                                    style: { }
-                                  }, ReasonReact.element(undefined, undefined, Image$ReactTemplate.make("", /* array */[])), React.createElement("button", {
-                                        style: {
-                                          background: "#1782C4",
-                                          border: "none",
-                                          color: "#ffffff",
-                                          cursor: "pointer",
-                                          height: "60px",
-                                          padding: "5px 8px",
-                                          width: "250px",
-                                          borderRadius: "5px"
-                                        },
-                                        onClick: (function () {
-                                            return Curry._1(self[/* send */3], /* DogsFetch */0);
-                                          })
-                                      }, "Find a pup!")));
+                                className: "wrapper"
+                              }, React.createElement("button", {
+                                    style: {
+                                      background: "#1782C4",
+                                      border: "none",
+                                      color: "#ffffff",
+                                      cursor: "pointer",
+                                      height: "60px",
+                                      padding: "5px 8px",
+                                      width: "250px",
+                                      borderRadius: "5px",
+                                      flex: "1 0 60px"
+                                    },
+                                    onClick: (function () {
+                                        return Curry._1(self[/* send */3], /* DogsFetch */0);
+                                      })
+                                  }, "Find a pup!"), React.createElement("div", {
+                                    className: "gallery"
+                                  }, React.createElement("div", {
+                                        className: "side"
+                                      }, Belt_Array.map(Belt_List.toArray(self[/* state */1][/* savedPups */1]), (function (pup) {
+                                              return React.createElement("div", {
+                                                          className: "gallery-image"
+                                                        }, ReasonReact.element(undefined, undefined, Image$ReactTemplate.make(pup[/* imageSrc */1], /* array */[])), React.createElement("h3", undefined, pup[/* name */0]));
+                                            })))));
                 case 1 : 
-                    return React.createElement("div", undefined, "Loading...");
+                    return React.createElement("div", {
+                                className: "wrapper"
+                              }, React.createElement("div", {
+                                    className: "centered-action"
+                                  }, "Loading..."), React.createElement("div", {
+                                    className: "gallery"
+                                  }, React.createElement("div", {
+                                        className: "side"
+                                      }, Belt_Array.map(Belt_List.toArray(self[/* state */1][/* savedPups */1]), (function (pup) {
+                                              return React.createElement("div", {
+                                                          className: "gallery-image"
+                                                        }, ReasonReact.element(undefined, undefined, Image$ReactTemplate.make(pup[/* imageSrc */1], /* array */[])), React.createElement("h3", undefined, pup[/* name */0]));
+                                            })))));
                 case 2 : 
                     return React.createElement("div", undefined, "An error occurred!");
                 case 3 : 
                     return React.createElement("div", {
-                                className: "gallery"
+                                className: "wrapper"
                               }, React.createElement("div", {
-                                    className: "side"
-                                  }, Belt_Array.map(Belt_List.toArray(self[/* state */1][/* savedPups */1]), (function (pup) {
-                                          return React.createElement("div", {
-                                                      className: "gallery-image"
-                                                    }, ReasonReact.element(undefined, undefined, Image$ReactTemplate.make(pup[/* imageSrc */1], /* array */[])), React.createElement("h3", undefined, pup[/* name */0]));
-                                        }))), React.createElement("div", {
-                                    style: {
-                                      display: "flex",
-                                      alignItems: "center",
-                                      flexDirection: "column",
-                                      justifyContent: "space-around"
-                                    }
+                                    className: "centered-action"
                                   }, ReasonReact.element(undefined, undefined, Image$ReactTemplate.make(getSource(self[/* state */1][/* dog */2]), /* array */[])), React.createElement("div", {
                                         style: {
                                           display: "flex",
+                                          height: "75px",
                                           marginTop: "10px",
                                           width: "300px",
-                                          alignItems: "baseline",
+                                          alignItems: "center",
+                                          flexDirection: "column",
                                           justifyContent: "space-between"
                                         }
                                       }, React.createElement("input", {
-                                            style: {
-                                              background: "transparent",
-                                              border: "none",
-                                              borderBottom: "1px solid",
-                                              display: "flex",
-                                              height: "30px",
-                                              padding: "0px 8px",
-                                              textAlign: "center",
-                                              alignItems: "center"
-                                            },
+                                            className: "input",
                                             autoFocus: true,
                                             placeholder: "give your pup a name",
                                             onChange: (function ($$event) {
@@ -119,13 +113,19 @@ function make() {
                                               cursor: "pointer",
                                               height: "30px",
                                               padding: "5px 8px",
-                                              width: "70px",
+                                              width: "200px",
                                               borderRadius: "5px"
                                             },
                                             onClick: (function () {
                                                 return Curry._1(self[/* send */3], /* SavePup */1);
                                               })
-                                          }, "save"))));
+                                          }, "save"))), React.createElement("div", {
+                                    className: "side"
+                                  }, Belt_Array.map(Belt_List.toArray(self[/* state */1][/* savedPups */1]), (function (pup) {
+                                          return React.createElement("div", {
+                                                      className: "gallery-image"
+                                                    }, ReasonReact.element(undefined, undefined, Image$ReactTemplate.make(pup[/* imageSrc */1], /* array */[])), React.createElement("h3", undefined, pup[/* name */0]));
+                                        }))));
                 
               }
             }),

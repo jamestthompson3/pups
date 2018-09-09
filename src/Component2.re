@@ -78,52 +78,92 @@ let make = _children => {
   render: self =>
     switch (self.state.status) {
       | Inactive =>
-    <div className="gallery">
-    <div className="side">
-    (
-      Array.map(List.toArray(self.state.savedPups), pup =>
-        <div className="gallery-image">
-        <Image source=pup.imageSrc />
-        <h3>(ReasonReact.string(pup.name))</h3>
-        </div>
-       )
-      |> ReasonReact.array
-      )
-    </div>
-    <div
-    className="centered-action"
+      <div className="wrapper">
+      <button
+      onClick=(_event => self.send(DogsFetch))
       style=(
         ReactDOMRe.Style.make(
-                    ()
+          ~background="#1782C4",
+          ~color="#ffffff",
+          ~padding="5px 8px",
+          ~borderRadius="5px",
+          ~border="none",
+          ~width="250px",
+          ~flex="1 0 60px",
+          ~height="60px",
+          ~cursor="pointer",
+          ()
         )
-       )>
-
-      <Image source="" />
-
-      <button
-        onClick=(_event => self.send(DogsFetch))
-        style=(
-          ReactDOMRe.Style.make(
-            ~background="#1782C4",
-            ~color="#ffffff",
-            ~padding="5px 8px",
-            ~borderRadius="5px",
-            ~border="none",
-            ~width="250px",
-            ~height="60px",
-            ~cursor="pointer",
-            ()
-          )
-        )>
-        (ReasonReact.string("Find a pup!"))
+      )>
+      (ReasonReact.string("Find a pup!"))
       </button>
-      </div>
-      </div>
 
+      <div className="gallery">
+      <div className="side">
+      (
+        Array.map(List.toArray(self.state.savedPups), pup =>
+                  <div className="gallery-image">
+                  <Image source=pup.imageSrc />
+                  <h3>(ReasonReact.string(pup.name))</h3>
+                  </div>
+        )
+        |> ReasonReact.array
+        )
+      </div>
+      </div>
+      </div>
     | Error => <div> (ReasonReact.string("An error occurred!")) </div>
-    | Loading => <div> (ReasonReact.string("Loading...")) </div>
+    | Loading =>
+    <div className="wrapper">
+      <div className="centered-action">
+        (ReasonReact.string("Loading..."))
+      </div>
+        <div className="gallery">
+          <div className="side">
+            (
+              Array.map(List.toArray(self.state.savedPups), pup =>
+                        <div className="gallery-image">
+                        <Image source=pup.imageSrc />
+                        <h3>(ReasonReact.string(pup.name))</h3>
+                        </div>
+                   )
+              |> ReasonReact.array
+            )
+          </div>
+        </div>
+    </div>
     | Loaded =>
-    <div className="gallery">
+    <div className="wrapper">
+      <div className="centered-action" >
+      <Image source=getSource(self.state.dog) />
+      <div style=(ReactDOMRe.Style.make(~display="flex", ~flexDirection="column", ~marginTop="10px", ~width="300px", ~height="75px", ~justifyContent="space-between", ~alignItems="center", ()))>
+      <input
+        className="input"
+        placeholder="give your pup a name"
+        onChange=(
+            event => self.send(NamePup(ReactEvent.Form.target(event)##value))
+          )
+        autoFocus=true
+      />
+    <button
+    onClick=(_event => self.send(SavePup))
+    style=(
+      ReactDOMRe.Style.make(
+        ~background="#1782C4",
+        ~color="#ffffff",
+        ~padding="5px 8px",
+        ~borderRadius="5px",
+        ~border="none",
+        ~width="200px",
+        ~height="30px",
+        ~cursor="pointer",
+        ()
+      )
+    )>
+    (ReasonReact.string("save"))
+    </button>
+    </div>
+    </div>
     <div className="side">
     (
       Array.map(List.toArray(self.state.savedPups), pup =>
@@ -134,48 +174,6 @@ let make = _children => {
       )
       |> ReasonReact.array
       )
-    </div>
-
-    <div style=(ReactDOMRe.Style.make(~display="flex", ~flexDirection="column", ~alignItems="center", ~justifyContent="space-around", ()))>
-    <Image source=getSource(self.state.dog) />
-    <div style=(ReactDOMRe.Style.make(~display="flex", ~marginTop="10px", ~width="300px", ~justifyContent="space-between", ~alignItems="baseline", ()))>
-    <input style=(
-      ReactDOMRe.Style.make(
-        ~border="none",
-        ~height="30px",
-        ~borderBottom="1px solid",
-        ~textAlign="center",
-        ~background="transparent",
-        ~padding="0px 8px",
-        ~display="flex",
-        ~alignItems="center",
-        ())
-    )
-    placeholder="give your pup a name"
-    onChange=(
-      event => self.send(NamePup(ReactEvent.Form.target(event)##value))
-    )
-    autoFocus=true
-    />
-    <button
-    onClick=(_event => self.send(SavePup))
-    style=(
-      ReactDOMRe.Style.make(
-        ~background="#1782C4",
-        ~color="#ffffff",
-        ~padding="5px 8px",
-        ~borderRadius="5px",
-        ~border="none",
-        ~width="70px",
-        ~height="30px",
-        ~cursor="pointer",
-        ()
-      )
-    )>
-    (ReasonReact.string("save"))
-    </button>
-
-    </div>
     </div>
     </div>
     },
