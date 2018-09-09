@@ -90,7 +90,7 @@ let make = _children => {
           ~border="none",
           ~width="250px",
           ~flex="1 0 60px",
-          ~height="60px",
+          ~maxHeight="60px",
           ~cursor="pointer",
           ()
         )

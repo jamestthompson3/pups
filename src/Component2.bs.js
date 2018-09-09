@@ -49,7 +49,7 @@ function make() {
                                       border: "none",
                                       color: "#ffffff",
                                       cursor: "pointer",
-                                      height: "60px",
+                                      maxHeight: "60px",
                                       padding: "5px 8px",
                                       width: "250px",
                                       borderRadius: "5px",
