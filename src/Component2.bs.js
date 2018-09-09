@@ -4,9 +4,19 @@
 var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
+var Belt_List = require("bs-platform/lib/js/belt_List.js");
+var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 var Json_decode = require("@glennsl/bs-json/src/Json_decode.bs.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Image$ReactTemplate = require("./Image.bs.js");
+
+function getSource(dog) {
+  if (dog !== undefined) {
+    return dog;
+  } else {
+    return "";
+  }
+}
 
 function dogs(json) {
   return Json_decode.field("message", Json_decode.string, json);
@@ -28,94 +38,172 @@ function make() {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function (self) {
-              var match = self[/* state */1];
-              if (typeof match === "number") {
-                switch (match) {
-                  case 0 : 
-                      return React.createElement("div", {
-                                  style: {
-                                    display: "flex",
-                                    height: "300px",
-                                    alignItems: "center",
-                                    flexDirection: "column",
-                                    justifyContent: "space-between"
-                                  }
-                                }, ReasonReact.element(undefined, undefined, Image$ReactTemplate.make("", /* array */[])), React.createElement("button", {
-                                      style: {
-                                        background: "#1782C4",
-                                        border: "none",
-                                        color: "#ffffff",
-                                        cursor: "pointer",
-                                        height: "60px",
-                                        padding: "5px 8px",
-                                        width: "250px",
-                                        borderRadius: "5px"
-                                      },
-                                      onClick: (function () {
-                                          return Curry._1(self[/* send */3], /* DogsFetch */0);
-                                        })
-                                    }, "Find a pup!"));
-                  case 1 : 
-                      return React.createElement("div", undefined, "Loading...");
-                  case 2 : 
-                      return React.createElement("div", undefined, "An error occurred!");
-                  
-                }
-              } else {
-                return React.createElement("div", {
-                            style: {
-                              display: "flex",
-                              alignItems: "center",
-                              flexDirection: "column",
-                              justifyContent: "space-around"
-                            }
-                          }, ReasonReact.element(undefined, undefined, Image$ReactTemplate.make(match[0], /* array */[])), React.createElement("input", {
-                                style: {
-                                  background: "transparent",
-                                  border: "none",
-                                  borderBottom: "1px solid",
-                                  display: "flex",
-                                  marginTop: "10px",
-                                  padding: "0px 8px",
-                                  textAlign: "center",
-                                  alignItems: "center"
-                                },
-                                placeholder: "give your pup a name"
-                              }));
+              var match = self[/* state */1][/* status */0];
+              switch (match) {
+                case 0 : 
+                    return React.createElement("div", {
+                                className: "gallery"
+                              }, React.createElement("div", {
+                                    className: "side"
+                                  }, Belt_Array.map(Belt_List.toArray(self[/* state */1][/* savedPups */1]), (function (pup) {
+                                          return React.createElement("div", {
+                                                      className: "gallery-image"
+                                                    }, ReasonReact.element(undefined, undefined, Image$ReactTemplate.make(pup[/* imageSrc */1], /* array */[])), React.createElement("h3", undefined, pup[/* name */0]));
+                                        }))), React.createElement("div", {
+                                    className: "centered-action",
+                                    style: { }
+                                  }, ReasonReact.element(undefined, undefined, Image$ReactTemplate.make("", /* array */[])), React.createElement("button", {
+                                        style: {
+                                          background: "#1782C4",
+                                          border: "none",
+                                          color: "#ffffff",
+                                          cursor: "pointer",
+                                          height: "60px",
+                                          padding: "5px 8px",
+                                          width: "250px",
+                                          borderRadius: "5px"
+                                        },
+                                        onClick: (function () {
+                                            return Curry._1(self[/* send */3], /* DogsFetch */0);
+                                          })
+                                      }, "Find a pup!")));
+                case 1 : 
+                    return React.createElement("div", undefined, "Loading...");
+                case 2 : 
+                    return React.createElement("div", undefined, "An error occurred!");
+                case 3 : 
+                    return React.createElement("div", {
+                                className: "gallery"
+                              }, React.createElement("div", {
+                                    className: "side"
+                                  }, Belt_Array.map(Belt_List.toArray(self[/* state */1][/* savedPups */1]), (function (pup) {
+                                          return React.createElement("div", {
+                                                      className: "gallery-image"
+                                                    }, ReasonReact.element(undefined, undefined, Image$ReactTemplate.make(pup[/* imageSrc */1], /* array */[])), React.createElement("h3", undefined, pup[/* name */0]));
+                                        }))), React.createElement("div", {
+                                    style: {
+                                      display: "flex",
+                                      alignItems: "center",
+                                      flexDirection: "column",
+                                      justifyContent: "space-around"
+                                    }
+                                  }, ReasonReact.element(undefined, undefined, Image$ReactTemplate.make(getSource(self[/* state */1][/* dog */2]), /* array */[])), React.createElement("div", {
+                                        style: {
+                                          display: "flex",
+                                          marginTop: "10px",
+                                          width: "300px",
+                                          alignItems: "baseline",
+                                          justifyContent: "space-between"
+                                        }
+                                      }, React.createElement("input", {
+                                            style: {
+                                              background: "transparent",
+                                              border: "none",
+                                              borderBottom: "1px solid",
+                                              display: "flex",
+                                              height: "30px",
+                                              padding: "0px 8px",
+                                              textAlign: "center",
+                                              alignItems: "center"
+                                            },
+                                            autoFocus: true,
+                                            placeholder: "give your pup a name",
+                                            onChange: (function ($$event) {
+                                                return Curry._1(self[/* send */3], /* NamePup */Block.__(1, [$$event.target.value]));
+                                              })
+                                          }), React.createElement("button", {
+                                            style: {
+                                              background: "#1782C4",
+                                              border: "none",
+                                              color: "#ffffff",
+                                              cursor: "pointer",
+                                              height: "30px",
+                                              padding: "5px 8px",
+                                              width: "70px",
+                                              borderRadius: "5px"
+                                            },
+                                            onClick: (function () {
+                                                return Curry._1(self[/* send */3], /* SavePup */1);
+                                              })
+                                          }, "save"))));
+                
               }
             }),
           /* initialState */(function () {
-              return /* Inactive */0;
+              return /* record */[
+                      /* status : Inactive */0,
+                      /* savedPups : [] */0,
+                      /* dog */undefined,
+                      /* name */""
+                    ];
             }),
           /* retainedProps */component[/* retainedProps */11],
-          /* reducer */(function (action, _) {
+          /* reducer */(function (action, state) {
               if (typeof action === "number") {
-                if (action !== 0) {
-                  return /* Update */Block.__(0, [/* Error */2]);
-                } else {
-                  return /* UpdateWithSideEffects */Block.__(2, [
-                            /* Loading */1,
-                            (function (self) {
-                                fetch("https://dog.ceo/api/breeds/image/random").then((function (prim) {
-                                            return prim.json();
-                                          })).then((function (json) {
-                                          var dogs = Json_decode.field("message", Json_decode.string, json);
-                                          return Promise.resolve(Curry._1(self[/* send */3], /* DogsFetched */[dogs]));
-                                        })).catch((function () {
-                                        return Promise.resolve(Curry._1(self[/* send */3], /* DogsFailedToFetch */1));
-                                      }));
-                                return /* () */0;
-                              })
-                          ]);
+                switch (action) {
+                  case 0 : 
+                      return /* UpdateWithSideEffects */Block.__(2, [
+                                /* record */[
+                                  /* status : Loading */1,
+                                  /* savedPups */state[/* savedPups */1],
+                                  /* dog */undefined,
+                                  /* name */""
+                                ],
+                                (function (self) {
+                                    fetch("https://dog.ceo/api/breeds/image/random").then((function (prim) {
+                                                return prim.json();
+                                              })).then((function (json) {
+                                              var dogs = Json_decode.field("message", Json_decode.string, json);
+                                              return Promise.resolve(Curry._1(self[/* send */3], /* DogsFetched */Block.__(0, [dogs])));
+                                            })).catch((function () {
+                                            return Promise.resolve(Curry._1(self[/* send */3], /* DogsFailedToFetch */2));
+                                          }));
+                                    return /* () */0;
+                                  })
+                              ]);
+                  case 1 : 
+                      return /* Update */Block.__(0, [/* record */[
+                                  /* status : Inactive */0,
+                                  /* savedPups : :: */[
+                                    /* record */[
+                                      /* name */state[/* name */3],
+                                      /* imageSrc */getSource(state[/* dog */2])
+                                    ],
+                                    state[/* savedPups */1]
+                                  ],
+                                  /* dog */undefined,
+                                  /* name */""
+                                ]]);
+                  case 2 : 
+                      return /* Update */Block.__(0, [/* record */[
+                                  /* status : Error */2,
+                                  /* savedPups */state[/* savedPups */1],
+                                  /* dog */state[/* dog */2],
+                                  /* name */state[/* name */3]
+                                ]]);
+                  
                 }
+              } else if (action.tag) {
+                return /* Update */Block.__(0, [/* record */[
+                            /* status */state[/* status */0],
+                            /* savedPups */state[/* savedPups */1],
+                            /* dog */state[/* dog */2],
+                            /* name */action[0]
+                          ]]);
               } else {
-                return /* Update */Block.__(0, [/* Loaded */[action[0]]]);
+                return /* Update */Block.__(0, [/* record */[
+                            /* status : Loaded */3,
+                            /* savedPups */state[/* savedPups */1],
+                            /* dog */action[0],
+                            /* name */""
+                          ]]);
               }
             }),
           /* jsElementWrapped */component[/* jsElementWrapped */13]
         ];
 }
 
+exports.getSource = getSource;
 exports.Decode = Decode;
 exports.component = component;
 exports.make = make;
